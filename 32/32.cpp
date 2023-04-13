@@ -14,65 +14,6 @@
 #include <map>
 using namespace std;
 
-// Используя контейнер map реализовать программу – словарь.
-// Основные возможности :
-// ■ заполнение словаря с клавиатуры
-// ■ поиск слова;
-// ■ добавление слов
-// ■ удаление слов;
-// ■ запись словаря в файл.
-
-// Словарь должен быть реализован в виде контейнера map, где ключом является слово, а значением – его перевод.
-// При заполнении словаря с клавиатуры, пользователь вводит слово и его перевод, разделенные пробелом.
-// При поиске слова, пользователь вводит слово, и программа выводит его перевод.
-// При добавлении слова, пользователь вводит слово и его перевод, разделенные пробелом.
-// При удалении слова, пользователь вводит слово, и программа удаляет его из словаря.
-// При записи словаря в файл, пользователь вводит имя файла, и программа записывает словарь в этот файл.
-
-// В программе должны быть реализованы следующие функции :
-// ■ заполнение словаря с клавиатуры;
-// ■ поиск слова;
-// ■ добавление слов;
-// ■ удаление слов;
-// ■ запись словаря в файл;
-// ■ чтение словаря из файла.
-
-// В программе должны быть реализованы следующие классы :
-// ■ класс Dictionary, реализующий словарь;
-// ■ класс DictionaryException, реализующий исключения, возникающие при работе со словарем.
-
-// В программе должны быть реализованы следующие исключения :
-// ■ слово не найдено;
-// ■ слово уже существует;
-// ■ ошибка открытия файла.
-
-// В программе должны быть реализованы следующие операции :
-// ■ операция ввода словаря с клавиатуры;
-// ■ операция вывода словаря на экран;
-// ■ операция поиска слова;
-// ■ операция добавления слова;
-// ■ операция удаления слова;
-
-// В программе должны быть реализованы следующие операторы :
-// ■ оператор ввода словаря из файла;
-// ■ оператор вывода словаря в файл.
-
-// В программе должны быть реализованы следующие методы :
-// ■ метод заполнения словаря с клавиатуры;
-// ■ метод поиска слова;
-// ■ метод добавления слова;
-// ■ метод удаления слова;
-// ■ метод записи словаря в файл;
-// ■ метод чтения словаря из файла.
-
-// В программе должны быть реализованы следующие конструкторы :
-// ■ конструктор по умолчанию;
-// ■ конструктор копирования;
-// ■ конструктор с параметрами.
-
-// В программе должны быть реализованы следующие деструкторы :
-// ■ деструктор по умолчанию.
-
 class DictionaryException
 {
 private:
@@ -103,7 +44,7 @@ public:
 		this->dictionary = dictionary;
 	}
 	~Dictionary(){}
-	void fillDictionary() // этот метод 
+	void fillDictionary()
 	{
 		string word, translate;
 		cout << "Enter word and translate: ";
@@ -114,7 +55,7 @@ public:
 		}
 		dictionary.insert(pair<string, string>(word, translate));
 	}
-	void findWord() // поиск слова
+	void findWord() 
 	{
 		string word;
 		cout << "Enter word: ";
@@ -125,7 +66,7 @@ public:
 		}
 		cout << "Translate: " << dictionary[word] << endl;
 	}
-	void addWord() // добавление слова
+	void addWord() 
 	{
 		string word, translate;
 		cout << "Enter word and translate: ";
@@ -136,7 +77,7 @@ public:
 		}
 		dictionary.insert(pair<string, string>(word, translate));
 	}
-	void deleteWord() // удаление слова
+	void deleteWord()
 	{
 		string word;
 		cout << "Enter word: ";
@@ -147,7 +88,7 @@ public:
 		}
 		dictionary.erase(word);
 	}
-	void writeDictionary() // запись словаря в файл
+	void writeDictionary()
 	{
 		string fileName;
 		cout << "Enter file name: ";
@@ -163,11 +104,11 @@ public:
 		}
 		fout.close();
 	}
-	void readDictionary()
+	void readDictionary() 
 	{
-		string fileName;
-		cout << "Enter file name: ";
-		cin >> fileName;
+		string fileName; 
+		cout << "Enter file name: "; 
+		cin >> fileName; 
 		ifstream fin(fileName);
 		if (!fin.is_open())
 		{
@@ -178,10 +119,16 @@ public:
 		{
 			fin >> word >> translate;
 			dictionary.insert(pair<string, string>(word, translate));
+
 		}
+		for (auto it = dictionary.begin(); it != dictionary.end(); it++)
+		{
+			cout << it->first << " " << it->second << endl;
+		}
+
 		fin.close();
 	}
-	friend istream& operator>>(istream& in, Dictionary& d)
+	friend istream& operator>>(istream& in, Dictionary& d) 
 	{
 		string word, translate;
 		while (!in.eof())
